@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kasse</title>
+<link rel="manifest" href="manifest.json">
+<style>
+body{margin:0;background:#111;color:#fff;font-family:system-ui}
+header{padding:15px;text-align:center;font-size:22px;background:#000}
+#warenkorb{padding:10px;min-height:200px}
+.summe{padding:10px;font-size:26px;text-align:right}
+button{width:100%;padding:18px;margin:6px 0;font-size:18px;border:0;border-radius:8px;background:#222;color:#fff}
+</style>
+</head>
+<body>
+
+<header>KASSE</header>
+<div id="warenkorb"></div>
+<div class="summe">Summe: <span id="summe">0.00 €</span></div>
+
+<button onclick="add('Artikel',5)">Artikel +5€</button>
+<button onclick="add('Pfand',-0.25)">Pfand -0,25€</button>
+<button onclick="bezahlen()">Bezahlen</button>
+
+<script>
+let w=[],s=0;
+function r(){
+  let d=document.getElementById("warenkorb");
+  d.innerHTML="";
+  w.forEach(i=>d.innerHTML+=`<div>${i.n} ${i.p.toFixed(2)} €</div>`);
+  document.getElementById("summe").innerText=s.toFixed(2)+" €";
+}
+function add(n,p){w.push({n,p});s+=p;r()}
+function bezahlen(){alert("Beleg erstellt");w=[];s=0;r()}
+</script>
+
+</body>
+</html>
